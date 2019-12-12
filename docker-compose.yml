@@ -1,0 +1,27 @@
+version: '3'
+services:
+  httpd:
+    container_name: httpd
+    build:
+      context: httpd
+    ports:
+      - 443:443
+    environment:
+      TOMCAT_HOST: "tomcat"
+  tomcat:
+    container_name: tomcat
+    build:
+      context: tomcat
+    ports:
+      - 8009:8009
+    environment:
+      LDAP_HOST: "ldap"
+  ldap:
+    container_name: ldap
+    build:
+      context: openldap
+    ports:
+      - '389:389'
+    environment:
+      LDAP_DOMAIN: "example.com"
+      LDAP_ADMIN_PASSWORD: "password"
